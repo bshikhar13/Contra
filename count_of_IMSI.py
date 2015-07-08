@@ -7,7 +7,7 @@ db = MySQLdb.connect(host="localhost",
 
 cur = db.cursor() 
 
-limit = 1000
+limit = 5000
 
 query = "SELECT DISTINCT servedIMSI FROM cdr LIMIT " + str(limit)
 
@@ -30,7 +30,7 @@ for row in cur.fetchall() :
 			#print "YOYOYO"
 			frequency_IMSI.append(innerrow[0])
 			result = IMSI + "  :  "+ str(innerrow[0])
-			print result
+			#print result
 
 
 
@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 print frequency_IMSI
 import seaborn as sns
 
-plt.hist(frequency_IMSI,bins = 250)
+plt.hist(frequency_IMSI,bins = 300)
 plt.title("Number of SIMs vs Activity")
 plt.xlabel("Activity")
 plt.ylabel("Number of SIMs")
