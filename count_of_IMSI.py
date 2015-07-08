@@ -7,7 +7,7 @@ db = MySQLdb.connect(host="localhost",
 
 cur = db.cursor() 
 
-limit = 50
+limit = 1000
 
 query = "SELECT DISTINCT servedIMSI FROM cdr LIMIT " + str(limit)
 
@@ -34,5 +34,21 @@ for row in cur.fetchall() :
 
 
 
-	
+frequency_IMSI = [int(i) for i in frequency_IMSI]
 
+import numpy as np
+import pandas as pd
+from scipy import stats, integrate
+import matplotlib.pyplot as plt
+print frequency_IMSI
+import seaborn as sns
+
+plt.hist(frequency_IMSI,bins = 250)
+plt.title("Number of SIMs vs Activity")
+plt.xlabel("Activity")
+plt.ylabel("Number of SIMs")
+plt.show()
+
+sns.set(color_codes=True)
+e = sns.distplot(frequency_IMSI,hist=False, rug=True);	
+print e
