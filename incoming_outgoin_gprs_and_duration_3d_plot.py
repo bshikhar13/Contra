@@ -42,4 +42,5 @@ z = duration
 
 
 ax.scatter(x, y, z)
+
 pyplot.show()
