@@ -54,8 +54,8 @@ import pylab as plt
 
 
 
-pp.plot(x,y,'go',)
-
+pp.plot(x,y,'go')
+pp.plot([0, 0], [40, 40])
 xl = pp.xlabel('Outgoing Calls')
 yl = pp.ylabel('Incoming Calss')
 ttl = pp.title('Outgoing calls vs Incoming calls ')
@@ -63,4 +63,3 @@ ttl = pp.title('Outgoing calls vs Incoming calls ')
 
 grd = pp.grid(True)
 pp.show()
-
