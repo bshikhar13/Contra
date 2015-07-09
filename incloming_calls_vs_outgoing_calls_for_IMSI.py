@@ -7,7 +7,7 @@ db = MySQLdb.connect(host="localhost",
 
 cur = db.cursor() 
 
-limit = 1400
+limit = 3000
 
 query = "SELECT DISTINCT IMSI_number FROM cdr_voice LIMIT " + str(limit)
 

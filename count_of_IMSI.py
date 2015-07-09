@@ -7,7 +7,7 @@ db = MySQLdb.connect(host="localhost",
 
 cur = db.cursor() 
 
-limit = 500
+limit = 1200
 
 query = "SELECT DISTINCT servedIMSI FROM cdr LIMIT " + str(limit)
 
