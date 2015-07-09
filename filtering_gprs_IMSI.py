@@ -50,4 +50,5 @@ suspiciouslist = list(set(cdr_voice_list)-set(cdr_list))
 print "Suspicios SIMs on the basis of not using Internet : " + str(len(suspiciouslist))
 print "UnSuspicios SIMs : " + str(len(cdr_voice_list)-len(suspiciouslist))
 
-
+suspiciouslist.append('Shikhar')
+print suspiciouslist

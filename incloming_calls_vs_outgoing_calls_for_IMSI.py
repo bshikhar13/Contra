@@ -15,7 +15,7 @@ cur.execute(query)
 
 MOCA = []
 MTCA = []
-
+sim = []
 counter = 1
 for row in cur.fetchall() :
 	IMSI = row[0]
@@ -23,6 +23,8 @@ for row in cur.fetchall() :
 	if IMSI :
 		innercur_MOCA = db.cursor()
 		innercur_MTCA = db.cursor()
+		
+		sim.append(IMSI)
 		
 		innerquery_MOCA = "SELECT count(*) FROM cdr_voice WHERE LongType = 'Mobile Originated Call Attempt' AND IMSI_number = " +str(IMSI) + " LIMIT 0,1000000"
 		innerquery_MTCA = "SELECT count(*) FROM cdr_voice WHERE LongType = 'Mobile Terminated Call Attempt' AND IMSI_number = " +str(IMSI) + " LIMIT 0,1000000"
@@ -41,8 +43,9 @@ for row in cur.fetchall() :
 #print MOCA
 #print MTCA
 print counter
-x = MOCA
-y = MTCA
+x = MOCA 							#Incoming calls
+y = MTCA 							#outgoing calls
+
 
 import numpy as np
 import matplotlib.pyplot as pp
@@ -63,3 +66,38 @@ ttl = pp.title('Outgoing calls vs Incoming calls ')
 
 grd = pp.grid(True)
 pp.show()
+
+x = [x+1 for x in x]				#To avoid the condition of divide by zero
+y = [y+1 for y in y]
+
+
+tempx = x
+tempy = y
+
+print x
+newlist= [float(x)/y for x,y in zip(tempx,tempy)]
+print len(newlist)
+
+print np.mean(newlist)
+print np.std(newlist)
+
+threshhold = np.mean(newlist) + np.std(newlist)
+
+plt.hist(newlist,bins = 500)
+
+plt.title("Frequency of SMS with SIMs")
+plt.xlabel("Number of SMSes")
+plt.ylabel("Number of SIMs")
+plt.show()
+
+suspicious = []
+
+counter = 0;
+
+for x in newlist:
+	if x >= threshhold:
+		suspicious.append(sim[counter])
+	counter = counter + 1
+	
+
+print len(suspicious)		

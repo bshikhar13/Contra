@@ -60,7 +60,7 @@ for k,v in D.items():
 	if len(v) >= threshhold:
 		unsuspicios.append(k)
 print "Total CDR SMS Records : " + str(count)
-print "Total Unique IMSIs in the data: " +str(counter)
+print "Total Unique IMSIs in the data using SMS/USSD: " +str(counter)
 print "Suspicious : " +str(counter - len(unsuspicios))
 print "UnSuspicious : " +str(len(unsuspicios))		
 
@@ -70,3 +70,4 @@ plt.title("Frequency of SMS with SIMs")
 plt.xlabel("Number of SMSes")
 plt.ylabel("Number of SIMs")
 plt.show()
+print unsuspicios
